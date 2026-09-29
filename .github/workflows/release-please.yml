@@ -46,9 +46,9 @@ jobs:
       - run: npm run build
 
       - name: Package extension
-        run: zip -r "$TAG.zip" manifest.json dist/
+        run: zip -r "${GITHUB_REPOSITORY#*/}-$TAG.zip" manifest.json dist/
 
       - name: Upload zip to release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload "$TAG" "$TAG.zip" --clobber
+        run: gh release upload "$TAG" "${GITHUB_REPOSITORY#*/}-$TAG.zip" --clobber
